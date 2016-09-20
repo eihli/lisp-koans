@@ -49,10 +49,32 @@
 ;
 ; Your goal is to write the score method.
 
-(defun score (dice)
-  ; You need to write this method
-)
+(defun count-elem (elem list)
+  (let ((result 0))
+    (loop for item in list
+       do (if (eql elem item) (setf result (+ result 1))))
+    (return-from count-elem result)))
 
+(defun count-items (item list)
+  (cond
+    ((null list) 0)
+    ((eql (car list) item) (+ 1 (count-items item (cdr list))))
+    (t (count-items item (cdr list)))))
+
+(defun score (dice)
+  (cond
+    ((eql nil dice) 0)
+    (t (+ (* 1000 (floor (/ (count-items 1 dice) 3)))
+	  (* 100 (floor (mod (count-items 1 dice) 3)))
+	  (* 500 (floor (/ (count-items 5 dice) 3)))
+	  (* 50 (floor (mod (count-items 5 dice) 3)))
+	  (* 600 (floor (/ (count-items 6 dice) 3)))
+	  (* 400 (floor (/ (count-items 4 dice) 3)))
+	  (* 300 (floor (/ (count-items 3 dice) 3)))
+	  (* 200 (floor (/ (count-items 2 dice) 3)))))))
+
+    ;; floor (count-items 1 / 3) * 1000
+    ;; (count-items 1 % 3) * 100
 (define-test test-score-of-an-empty-list-is-zero
     (assert-equal 0 (score nil)))
 
