@@ -44,13 +44,13 @@
 
 (define-test some-fancy-specifiers
   "format enclosed by ~{ and ~} applies to every element in a list."
-  (assert-equal ___
+  (assert-equal "[1][2][3][4]"
                 (format nil "~{[~a]~}" '(1 2 3 4)))
   ;; ~^ within the ~{ ~} stops processing the last element in the list.
-  (assert-equal "1|2|3|4|" (format nil ___ '(1 2 3 4)))
-  (assert-equal ___ (format nil "~{~a~^|~}" '(1 2 3 4)))
+  (assert-equal "1|2|3|4|" (format nil "~{~a|~}" '(1 2 3 4)))
+  (assert-equal "1|2|3|4" (format nil "~{~a~^|~}" '(1 2 3 4)))
   ;; ~r reads the integer
-  (assert-equal ___ (format nil "~r" 42))
+  (assert-equal "forty-two" (format nil "~r" 42))
   ;; put them all together
-  (assert-equal ___
+  (assert-equal "one,two,three,four"
                 (format nil "~{~r~^,~}" '(1 2 3 4))))
