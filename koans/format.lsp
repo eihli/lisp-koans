@@ -27,17 +27,17 @@
 (define-test test-format-with-plain-text
   "If there is no format specifier, FORMAT just returns the string
    itself."
-  (assert-equal ___ (format nil "this is plain text.")))
+  (assert-equal "this is plain text." (format nil "this is plain text.")))
 
 (define-test test-format-with-general-specifier
   "~a is a general specifier that translates to the print form of a
     parameter."
-  (assert-equal ___ (format nil "~a" 42))
-  (assert-equal ___ (format nil "~a" #\C))
-  (assert-equal ___ (format nil "~a" "galaxy far far away"))
+  (assert-equal "42" (format nil "~a" 42))
+  (assert-equal "C" (format nil "~a" #\C))
+  (assert-equal "galaxy far far away" (format nil "~a" "galaxy far far away"))
   ;; ~a can also translate to list
   ;; and parameters to FORMAT are passed by value
-  (assert-equal ___
+  (assert-equal "(/ 8 (- 3 (/ 8 3))) evaluates to 24"
                 (format nil "~a evaluates to ~a"
                         '(/ 8 (- 3 (/ 8 3)))
                         (/ 8 (- 3 (/ 8 3))))))
