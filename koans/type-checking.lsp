@@ -62,7 +62,7 @@
 
 (define-test test-some-types-are-lists
    (assert-true(typep (make-array 0 :element-type 'integer) '(SIMPLE-VECTOR 0)))
-   (true-or-false? ____ (typep (make-array '(3 3) :element-type 'integer) '(SIMPLE-ARRAY T (3 3)))))
+   (true-or-false? t (typep (make-array '(3 3) :element-type 'integer) '(SIMPLE-ARRAY T (3 3)))))
 
 
 (define-test test-type-specifier-lists-also-have-hierarchy
